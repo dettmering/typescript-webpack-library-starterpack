@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const PATHS = {
   src: path.join(__dirname, './src'),
@@ -30,5 +31,13 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   plugins: [
+  
+   
+    new WebpackShellPlugin({
+        onBuildStart:['echo "Webpack Start"'], 
+        onBuildEnd:['./deploy.sh'],
+        onBuildExit:['./deploy.sh']        
+    })
+  
   ]
 }
