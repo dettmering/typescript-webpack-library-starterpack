@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-const WebpackShellPlugin = require('webpack-shell-plugin');
+var WebpackCopyOnBuildPlugin = require('webpack-copy-on-build-plugin');
 
 const PATHS = {
   src: path.join(__dirname, './src'),
@@ -63,12 +63,19 @@ module.exports = {
   },
   plugins: [
   
-   /*
-    new WebpackShellPlugin({
-        onBuildStart:['echo "Webpack Start"'], 
-        onBuildEnd:['./deploy.sh'],
-        onBuildExit:['./deploy.sh']        
-    })
-  */
+   new WebpackCopyOnBuildPlugin([
+         {
+           from: 'build/my-lib.js',
+           to: 'build/my-lib-deployed.js'
+         },
+         {
+           from: 'build/my-lib.js',
+           to: 'build/my-lib-deployed-min.js'
+         },
+		  {
+           from: 'build/my-lib.js.map',
+           to: 'build/my-lib-deployed.map'
+         }
+        ])
   ]
 }
