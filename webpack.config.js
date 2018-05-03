@@ -63,12 +63,12 @@ module.exports = {
   },
   plugins: [
   
-   
+   /*
     new WebpackShellPlugin({
         onBuildStart:['echo "Webpack Start"'], 
         onBuildEnd:['./deploy.sh'],
         onBuildExit:['./deploy.sh']        
     })
-  
+  */
   ]
 }
