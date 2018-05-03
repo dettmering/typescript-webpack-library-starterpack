@@ -20,15 +20,46 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
+      
     rules: [
+     {
+                test: /\.(css|scss)$/,               
+                loaders: ["style-loader", "css-loader", "sass-loader"]
+            },
+
+     {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    esModule: true
+                }
+            },
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript-loader'
-      }
+        
+        // NOTE: I couldn't get Vue.js integration to work with 'awesome-typescript-loader'
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+            appendTsSuffixTo: [/\.vue$/],
+        }
+      },           
+        {
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'url-loader'
+        }
+      
+      
+      
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    //extensions: ['.ts', '.js']
+       extensions: ['.ts', '.js', '.vue'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        } 
+      
   },
   plugins: [
   
